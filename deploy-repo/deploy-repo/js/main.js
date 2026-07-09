@@ -1,26 +1,19 @@
-const PROJECTS = [
-  { file: 'render-01.png', layout: 'hero' },
-  { file: 'render-02.png', layout: 'tall' },
-  { file: 'render-03.png', layout: '' },
-  { file: 'render-04.png', layout: 'wide' },
-  { file: 'render-05.png', layout: '' },
-  { file: 'render-06.png', layout: 'tall' },
-  { file: 'render-07.png', layout: '' },
-  { file: 'render-08.png', layout: 'wide' },
-  { file: 'render-09.png', layout: '' },
-  { file: 'render-10.png', layout: 'hero' },
-  { file: 'render-11.png', layout: '' },
-  { file: 'render-12.png', layout: 'tall' },
-  { file: 'render-13.png', layout: '' },
-  { file: 'render-14.png', layout: 'wide' },
-  { file: 'render-15.png', layout: '' },
-  { file: 'render-16.jpeg', layout: 'tall' },
-  { file: 'render-17.jpeg', layout: '' },
-  { file: 'render-18.jpeg', layout: '' },
-  { file: 'render-19.jpeg', layout: 'wide' },
-  { file: 'render-20.jpeg', layout: '' },
-  { file: 'render-21.jpeg', layout: '' },
+const FILES = [
+  'render-01.png', 'render-02.png', 'render-03.png', 'render-04.png',
+  'render-05.png', 'render-06.png', 'render-07.png', 'render-08.png',
+  'render-09.png', 'render-10.png', 'render-11.jpeg', 'render-12.jpeg',
+  'render-13.jpeg', 'render-14.jpeg', 'render-15.png', 'render-16.png',
+  'render-17.png', 'render-18.png', 'render-19.png', 'render-20.png',
+  'render-21.png', 'render-22.jpeg', 'render-23.jpeg', 'render-24.jpeg',
+  'render-25.jpeg', 'render-26.jpeg', 'render-27.png', 'render-28.jpeg',
 ];
+
+const LAYOUT_PATTERN = ['hero', 'tall', '', 'wide', '', 'tall', '', 'wide', '', 'hero'];
+
+const PROJECTS = FILES.map((file, i) => ({
+  file,
+  layout: LAYOUT_PATTERN[i % LAYOUT_PATTERN.length],
+}));
 
 const gallery = document.querySelector('.gallery');
 const lightbox = document.getElementById('lightbox');

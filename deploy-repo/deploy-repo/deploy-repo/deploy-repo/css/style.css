@@ -11,7 +11,7 @@
   --text-muted: #8a8680;
   --accent: #c4b89a;
   --border: rgba(232, 228, 220, 0.08);
-  --gap: 14px;
+  --gap: 5px;
   --sidebar-width: 280px;
   --font: 'Roboto', sans-serif;
   --transition: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -106,6 +106,10 @@ body {
   color: var(--text);
 }
 
+.main--gallery .gallery {
+  padding-top: 48px;
+}
+
 .social {
   margin-top: auto;
   display: flex;
@@ -194,36 +198,48 @@ body {
   opacity: 0.4;
 }
 
-/* Gallery — masonry, full image visible */
+/* Gallery grid — film contact sheet layout */
 .gallery {
-  column-count: 2;
-  column-gap: var(--gap);
-  padding: 0 40px 64px;
-}
-
-.main--gallery .gallery {
-  padding-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  padding: 0 48px 64px;
+  grid-auto-rows: 260px;
 }
 
 .gallery__item {
-  break-inside: avoid;
-  margin-bottom: var(--gap);
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
   background: var(--bg-elevated);
-  line-height: 0;
+}
+
+.gallery__item--wide {
+  grid-column: span 2;
+}
+
+.gallery__item--tall {
+  grid-row: span 2;
+}
+
+.gallery__item--hero {
+  grid-column: span 2;
+  grid-row: span 2;
 }
 
 .gallery__item img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  transition: filter 0.5s ease, opacity 0.5s ease;
-  filter: brightness(0.94);
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.5s ease;
+  filter: brightness(0.92) contrast(1.02);
 }
 
 .gallery__item:hover img {
-  filter: brightness(1);
-  opacity: 0.95;
+  transform: scale(1.04);
+  filter: brightness(1) contrast(1.05);
 }
 
 /* Lightbox */
@@ -322,12 +338,14 @@ body {
 /* Responsive */
 @media (max-width: 1024px) {
   .gallery {
-    column-count: 2;
-    padding: 0 28px 48px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 220px;
+    padding: 0 32px 48px;
   }
 
-  .main--gallery .gallery {
-    padding-top: 32px;
+  .gallery__item--hero {
+    grid-column: span 2;
+    grid-row: span 1;
   }
 
   .intro {
@@ -394,13 +412,17 @@ body {
   }
 
   .gallery {
-    column-count: 1;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 280px;
     padding: 0 16px 48px;
-    column-gap: 10px;
+    gap: 4px;
   }
 
-  .gallery__item {
-    margin-bottom: 10px;
+  .gallery__item--wide,
+  .gallery__item--tall,
+  .gallery__item--hero {
+    grid-column: span 1;
+    grid-row: span 1;
   }
 
   .lightbox__nav {
